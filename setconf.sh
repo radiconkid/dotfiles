@@ -9,9 +9,9 @@ case "${unameOut}" in
     MINGW*)     machine=MinGw;;
     *)          machine="UNKNOWN:${unameOut}"
 esac
-MAC_COPY="ettach-to-user-namespace pbcopy"
-MAC_PASTE="ettach-to-user-namespace pbpaste"
-LILUX_COPY="xclip -i -sel clip > /dev/null"
+MAC_COPY="pbcopy"
+MAC_PASTE="pbpaste | tmux load-buffer - ; tmux paste-buffer"
+LINUX_COPY="xclip -i -sel clip \> \/dev\/null"
 LINUX_PASTE="xclip -o -sel clip | tmux load-buffer - ; tmux paste-buffer"
 
 cp -f $dir/tmux/tmux.conf /tmp/.tmux.conf
