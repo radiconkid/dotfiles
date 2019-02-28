@@ -35,7 +35,6 @@ call dein#add('mattn/emmet-vim')
 call dein#add('nathanaelkane/vim-indent-guides') " インデントを色分け
 call dein#add('regedarek/ZoomWin')
 call dein#add('scrooloose/syntastic')
-call dein#add('severin-lemaignan/vim-minimap')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tpope/vim-fugitive')
 call dein#add('ujihisa/neco-look') " 英単語の補完
