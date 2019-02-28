@@ -48,6 +48,7 @@ call dein#add('vim-scripts/grep.vim')
 call dein#add('scrooloose/nerdtree')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 call dein#add('airblade/vim-gitgutter')
+call dein#add('iberianpig/tig-explorer.vim')
 
 " Syntax
 call dein#add('chr4/nginx.vim')
@@ -69,6 +70,7 @@ if dein#check_install()
     call dein#install()
 endif
 
+let mapleader = "\<Space>"
 set runtimepath^=$HOME/.vim
 set ambiwidth=double
 set shell=/bin/bash
@@ -537,3 +539,17 @@ set updatetime=250
 highlight GitGutterAdd ctermfg=blue
 let g:gitgutter_highlight_lines = 1
 
+" open tig with current file
+nnoremap <Leader>T :TigOpenCurrentFile<CR>
+" open tig with Project root path
+nnoremap <Leader>t :TigOpenProjectRootDir<CR>
+" open tig grep
+nnoremap <Leader>g :TigGrep<CR>
+" resume from last grep
+nnoremap <Leader>r :TigGrepResume<CR>
+" open tig grep with the selected word
+vnoremap <Leader>g y:TigGrep<Space><C-R>"<CR>
+" open tig grep with the word under the cursor
+nnoremap <Leader>cg :<C-u>:TigGrep<Space><C-R><C-W><CR>
+" open tig blame with current file
+nnoremap <Leader>b :TigBlame<CR>
