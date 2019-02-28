@@ -27,7 +27,11 @@ fi
 cp -f /tmp/.tmux.conf ~/
 
 # vimrc
-rm ~/.vimrc ~/.config/nvim/init.vim ~/.config/nvim/ginit.vim
+rm ~/.vimrc \
+  ~/.config/nvim/init.vim \
+  ~/.config/nvim/ginit.vim \
+  ~/.config/nyaovim/nyaovimrc.html
 cp $dir/vim/vimrc ~/.vimrc
 cp $dir/vim/vimrc ~/.config/nvim/init.vim
 cp $dir/vim/ginit.vim ~/.config/nvim/ginit.vim
+cp $dir/vim/nyaovimrc.html ~/.config/nyaovim/nyaovimrc.html

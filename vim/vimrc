@@ -12,6 +12,9 @@ call dein#add('Shougo/dein.vim')
 " ==================== plugins ===============================
 call dein#add('MattesGroeger/vim-bookmarks')
 call dein#add('Nymphium/nyaovim-dynfont')
+call dein#add('rhysd/nyaovim-markdown-preview')
+call dein#add('rhysd/nyaovim-popup-tooltip')
+call dein#add('rhysd/nyaovim-mini-browser')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('Shougo/neosnippet-snippets') " スニペット
 call dein#add('Shougo/neosnippet.vim') " スニペット
@@ -71,7 +74,13 @@ set ambiwidth=double
 set shell=/bin/bash
 set nocompatible
 filetype on
-colorscheme sierra
+"let g:sierra_Pitch = 1
+"let g:sierra_Sunset = 1
+"let g:sierra_Twilight = 1
+"let g:sierra_Midnight = 1
+"let g:sierra_Midnight = 1
+colorscheme sierra2
+"colorscheme onedark
 
 if has('syntax') && !exists('g:syntax_on')
     syntax enable
@@ -224,26 +233,13 @@ nnoremap ]Q :<C-u>clast<CR>  " 最後へ
 "emmet の補完を<TAB>に変更
 let g:user_emmet_expandabbr_key = '<Tab>'
 
-" this machine config
-"if filereadable(expand("$HOME/.vimrc.local"))
-"  source $HOME/.vimrc.local
-"endif
-
 let $PYTHONPATH='/usr/lib/python3.4/site-packages'
 highlight Normal ctermbg=none
 
 " vimfiler -------------------------------
-"map <F3> :VimFiler -simple -winwidth=30 -no-quit<CR>
-"http://www.karakaram.com/vimfiler
 " F2 でツリーを表示する
 nnoremap <F2> :VimFiler -split -simple -winwidth=30 -no-quit<Cr>
-" デフォルトでツリーを表示させる (が、focusしない)
-"autocmd VimEnter * execute 'VimFiler -split -simple -winwidth=30 -no-quit -no-focus'
 
-"" http://hrsh7th.hatenablog.com/entry/20120229/1330525683
-" v で縦分割表示、s で横分割表示する
-" 関数名を my_vimfiler_settings から My_vimfiler_settings に変更した。
-"nnoremap <F2> :VimFiler -buffer-name=explorer -split -winwidth=45 -toggle -no-quit<Cr>
 autocmd! FileType vimfiler call My_vimfiler_settings()
 function! My_vimfiler_settings()
   nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
@@ -282,7 +278,7 @@ let g:vimfiler_as_default_explorer=1
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit -no-focus<Cr>
 nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit -no-focus<Cr>
 
-" セーフモード
+" セーフモード解除
 call vimfiler#custom#profile('default', 'context', { 'safe' : 0, })
 
 
@@ -337,14 +333,13 @@ endfunction
 " 選択中のCSVカラム名の列をハイライト表示する
 vmap <silent> ,hc :call SelectCsvH()<CR>
 
-"if executable('js-beautify')
-  command! -range=% -nargs=* HTMLTidy <line1>,<line2>call RangeHtmlBeautify()
-  command! -range=% -nargs=* JSTidy <line1>,<line2>call RangeJsBeautify()
-  command! -range=% -nargs=* CSSTidy <line1>,<line2>call RangeCSSBeautify()
-  command! -range=% -nargs=* JSONTidy <line1>,<line2>call RangeJsonBeautify()
-"endif
+command! -range=% -nargs=* BeautifyHTML <line1>,<line2>call RangeHtmlBeautify()
+command! -range=% -nargs=* BeautifyJS <line1>,<line2>call RangeJsBeautify()
+command! -range=% -nargs=* BeautifyCSS <line1>,<line2>call RangeCSSBeautify()
+command! -range=% -nargs=* BeautifyJSON <line1>,<line2>call RangeJsonBeautify()
 
 source $HOME/.vim/scripts/XmlMinify.vim
+command! -range=% -nargs=* Minify <line1>,<line2>call XmlMinify()
 
 if has('nvim')
     " neovim 限定の設定
@@ -526,7 +521,6 @@ nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
 nnoremap <leader>y :<C-u>Unite yankround<CR>
 
-" neocomplete
 "起動時に有効
 let g:neocomplete#enable_at_startup = 1
 " ポップアップメニューで表示される候補の数
