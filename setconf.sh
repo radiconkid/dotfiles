@@ -9,6 +9,8 @@ case "${unameOut}" in
     MINGW*)     machine=MinGw;;
     *)          machine="UNKNOWN:${unameOut}"
 esac
+
+# tmux.conf
 MAC_COPY="pbcopy"
 MAC_PASTE="pbpaste | tmux load-buffer - ; tmux paste-buffer"
 LINUX_COPY="xclip -i -sel clip \> \/dev\/null"
@@ -23,3 +25,7 @@ elif [ $machine = "Mac" ]; then
     sed -ie "s/\%PASTE\%/\"$MAC_PASTE\"/g" /tmp/.tmux.conf
 fi
 cp -f /tmp/.tmux.conf ~/
+
+# vimrc
+rm ~/.vimrc
+cp $dir/vim/vimrc ~/.vimrc
