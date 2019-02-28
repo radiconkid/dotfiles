@@ -42,6 +42,9 @@ call dein#add('vim-jp/vimdoc-ja')
 call dein#add('vim-scripts/DirDiff.vim')
 call dein#add('vim-scripts/EnhCommentify.vim')
 call dein#add('vim-scripts/grep.vim')
+call dein#add('scrooloose/nerdtree')
+call dein#add('Xuyuanp/nerdtree-git-plugin')
+call dein#add('airblade/vim-gitgutter')
 
 " Syntax
 call dein#add('chr4/nginx.vim')
@@ -535,3 +538,8 @@ highlight Pmenu ctermbg=6
 highlight PmenuSel ctermbg=3
 highlight PMenuSbar ctermbg=0
 inoremap <expr><CR>  pumvisible() ? neocomplete#close_popup() : "<CR>"
+
+set updatetime=250
+highlight GitGutterAdd ctermfg=blue
+let g:gitgutter_highlight_lines = 1
+
