@@ -4,7 +4,6 @@ if &compatible
 endif
 set runtimepath^=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 
-
 " neobundle の設定
 call dein#begin(expand('$HOME/.vim/dein'))
 call dein#add('Shougo/dein.vim')
@@ -12,7 +11,7 @@ call dein#add('Shougo/dein.vim')
 " ==================== plugins ===============================
 "call dein#add('Shougo/neosnippet-snippets')             " スニペット
 "call dein#add('Shougo/neosnippet.vim')                  " スニペット
-"call dein#add('Townk/vim-autoclose')                    " カッコを自動で閉じる
+call dein#add('Townk/vim-autoclose')                    " カッコを自動で閉じる
 "call dein#add('honza/vim-snippets') " スニペット
 "call dein#add('itchyny/lightline.vim') " 情報を見やすく
 "call dein#add('nathanaelkane/vim-indent-guides') " インデントを色分け
@@ -45,6 +44,7 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('scrooloose/syntastic')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tpope/vim-fugitive')
+call dein#add('vim-airline/vim-airline')
 call dein#add('vim-jp/vimdoc-ja')
 call dein#add('vim-scripts/DirDiff.vim')
 call dein#add('vim-scripts/EnhCommentify.vim')
@@ -353,7 +353,7 @@ if has('nvim')
     " neovim 限定の設定
     tnoremap <silent> <ESC> <C-\><C-n>
 endif
-"let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 map <Space> :tabn<CR>
 map <S-Space> :tabp<CR>
 map <Left> :tabp<CR>
@@ -529,17 +529,17 @@ nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
 nnoremap <leader>y :<C-u>Unite yankround<CR>
 
-"起動時に有効
-let g:neocomplete#enable_at_startup = 1
-" ポップアップメニューで表示される候補の数
-let g:neocomplete#max_list = 50
-"キーワードの長さ、デフォルトで80
-let g:neocomplete#max_keyword_width = 80
-let g:neocomplete#enable_ignore_case = 1
-highlight Pmenu ctermbg=6
-highlight PmenuSel ctermbg=3
-highlight PMenuSbar ctermbg=0
-inoremap <expr><CR>  pumvisible() ? neocomplete#close_popup() : "<CR>"
+""起動時に有効
+"let g:neocomplete#enable_at_startup = 1
+"" ポップアップメニューで表示される候補の数
+"let g:neocomplete#max_list = 50
+""キーワードの長さ、デフォルトで80
+"let g:neocomplete#max_keyword_width = 80
+"let g:neocomplete#enable_ignore_case = 1
+"highlight Pmenu ctermbg=6
+"highlight PmenuSel ctermbg=3
+"highlight PMenuSbar ctermbg=0
+"inoremap <expr><CR>  pumvisible() ? neocomplete#close_popup() : "<CR>"
 
 set updatetime=250
 highlight GitGutterAdd ctermfg=blue
@@ -559,3 +559,32 @@ vnoremap <Leader>g y:TigGrep<Space><C-R>"<CR>
 nnoremap <Leader>cg :<C-u>:TigGrep<Space><C-R><C-W><CR>
 " open tig blame with current file
 nnoremap <Leader>b :TigBlame<CR>
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#manual_complete()
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" <BS>: close popup and delete backword char.
+inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+
+let g:deoplete#enable_camel_case = 1
+
+" neoterm
+if !has('nvim')
+    nnoremap <silent> ,rc :TREPLSendFile<cr>
+    nnoremap <silent> ,rl :TREPLSendLine<cr>
+    vnoremap <silent> ,rl :TREPLSendSelection<cr>
+    nnoremap <silent> vt :Ttoggle<cr>
+    nnoremap <silent> vs :terminal<cr>
+endif
