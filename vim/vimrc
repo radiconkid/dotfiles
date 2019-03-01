@@ -1,74 +1,57 @@
-" ------------------ dein setting -------------------------
-if &compatible
-    set nocompatible
+if has('vim_starting')
+  set rtp+=~/.vim/plugged/vim-plug
+  if !isdirectory(expand('~/.vim/plugged/vim-plug'))
+    echo 'install vim-plug...'
+    call system('mkdir -p ~/.vim/plugged/vim-plug')
+    call system('git clone https://github.com/junegunn/vim-plug.git ~/.vim/plugged/vim-plug/autoload')
+  end
 endif
-set runtimepath^=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" neobundle の設定
-call dein#begin(expand('$HOME/.vim/dein'))
-call dein#add('Shougo/dein.vim')
-
-" ==================== plugins ===============================
-"call dein#add('Shougo/neosnippet-snippets')             " スニペット
-"call dein#add('Shougo/neosnippet.vim')                  " スニペット
-call dein#add('Townk/vim-autoclose')                    " カッコを自動で閉じる
-"call dein#add('honza/vim-snippets') " スニペット
-"call dein#add('itchyny/lightline.vim') " 情報を見やすく
-"call dein#add('nathanaelkane/vim-indent-guides') " インデントを色分け
-"call dein#add('ujihisa/neco-look') " 英単語の補完
-call dein#add('MattesGroeger/vim-bookmarks')
-"call dein#add('Nymphium/nyaovim-dynfont')
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/vimfiler.vim')
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-call dein#add('Xuyuanp/nerdtree-git-plugin')
-"call dein#add('airblade/vim-gitgutter')
-call dein#add('airblade/vim-rooter')
-call dein#add('christoomey/vim-tmux-navigator')
-call dein#add('daniel-samson/project-tree.vim')
-call dein#add('editorconfig/editorconfig-vim')
-call dein#add('evidens/vim-twig')
-call dein#add('fuenor/qfixgrep')
-call dein#add('iberianpig/tig-explorer.vim')
-call dein#add('kana/vim-submode')
-call dein#add('kassio/neoterm')
-call dein#add('leafcage/yankround.vim')
-call dein#add('maksimr/vim-jsbeautify')
-call dein#add('mattn/emmet-vim')
-call dein#add('regedarek/ZoomWin')
-"call dein#add('rhysd/nyaovim-markdown-preview')
-"call dein#add('rhysd/nyaovim-mini-browser')
-"call dein#add('rhysd/nyaovim-popup-tooltip')
-call dein#add('scrooloose/nerdtree')
-call dein#add('scrooloose/syntastic')
-call dein#add('thinca/vim-quickrun')
-call dein#add('tpope/vim-fugitive')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-jp/vimdoc-ja')
-call dein#add('vim-scripts/DirDiff.vim')
-call dein#add('vim-scripts/EnhCommentify.vim')
-call dein#add('vim-scripts/grep.vim')
+call plug#begin('~/.vim/plugged')
+  Plug 'junegunn/vim-plug',
+        \ {'dir': '~/.vim/plugged/vim-plug/autoload'}
+  Plug 'Townk/vim-autoclose'
+  Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle'] }
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/unite.vim'
+  Plug 'Shougo/vimfiler.vim', {}
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'airblade/vim-rooter'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'daniel-samson/project-tree.vim'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'evidens/vim-twig'
+  Plug 'fuenor/qfixgrep'
+  Plug 'iberianpig/tig-explorer.vim'
+  Plug 'kana/vim-submode'
+  Plug 'kassio/neoterm'
+  Plug 'leafcage/yankround.vim'
+  Plug 'maksimr/vim-jsbeautify'
+  Plug 'mattn/emmet-vim'
+  Plug 'regedarek/ZoomWin'
+  Plug 'scrooloose/syntastic'
+  Plug 'thinca/vim-quickrun'
+  Plug 'tpope/vim-fugitive'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'vim-jp/vimdoc-ja'
+  Plug 'vim-scripts/DirDiff.vim'
+  Plug 'vim-scripts/EnhCommentify.vim'
+  Plug 'vim-scripts/grep.vim'
+" Plug 'edkolev/tmuxline.vim'
+  Plug 'konpa/devicon'
+  Plug 'airblade/vim-gitgutter'
 
 " Syntax
-call dein#add('chr4/nginx.vim')
-call dein#add('ekalinin/Dockerfile.vim')
-" ============================================================
-call dein#end()
-filetype plugin indent on
+  Plug 'chr4/nginx.vim'
+  Plug 'ekalinin/Dockerfile.vim'
 
-" deoplete 分岐インストール用
-call dein#add('Shougo/deoplete.nvim')
-if !has('nvim')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
-endif
-let g:deoplete#enable_at_startup = 1
+" Themes
+  Plug 'joshdick/onedark.vim'
+  Plug 'AlessandroYorba/Sierra'
 
-" 未インストールのプラグインをインストール
-if dein#check_install()
-    call dein#install()
-endif
+call plug#end()
 
 let mapleader = "\<Space>"
 set runtimepath^=$HOME/.vim
@@ -77,12 +60,12 @@ set shell=/bin/bash
 set nocompatible
 "set termguicolors
 filetype on
-"let g:sierra_Pitch = 1
+let g:sierra_Pitch = 1
 "let g:sierra_Sunset = 1
 "let g:sierra_Twilight = 1
 "let g:sierra_Midnight = 1
 "let g:sierra_Midnight = 1
-colorscheme sierra2
+colorscheme sierra
 "colorscheme onedark
 
 if has('syntax') && !exists('g:syntax_on')
@@ -199,6 +182,7 @@ let g:did_UltiSnips_vim_after = 1
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme='onedark'
 
 "
 " Basic shortcuts definitions
@@ -225,9 +209,6 @@ nnoremap <C-z>  :undo<CR>
 inoremap <C-z>  <Esc>:undo<CR>
 nnoremap <C-y>  :redo<CR>
 inoremap <C-y>  <Esc>:redo<CR>
-" Tabs
-let g:airline_theme='badwolf'
-let g:airline#extensions#tabline#enabled = 1
 
 
 "grとコマンドすると:Rgrepが起動するようにしています。
@@ -432,6 +413,8 @@ endif
 " オリジナルキーマップ
 nmap nw :set nowrap<CR>
 nmap wr :set wrap<CR>
+nmap vs :vsplit<CR>
+nmap ss :split<CR>
 
 " ;でコマンド入力( ;と:を入れ替)
 "noremap ; :
