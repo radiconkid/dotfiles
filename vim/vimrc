@@ -10,45 +10,45 @@ call dein#begin(expand('$HOME/.vim/dein'))
 call dein#add('Shougo/dein.vim')
 
 " ==================== plugins ===============================
+"call dein#add('Shougo/neosnippet-snippets')             " スニペット
+"call dein#add('Shougo/neosnippet.vim')                  " スニペット
+"call dein#add('Townk/vim-autoclose')                    " カッコを自動で閉じる
+"call dein#add('honza/vim-snippets') " スニペット
+"call dein#add('itchyny/lightline.vim') " 情報を見やすく
+"call dein#add('nathanaelkane/vim-indent-guides') " インデントを色分け
+"call dein#add('ujihisa/neco-look') " 英単語の補完
 call dein#add('MattesGroeger/vim-bookmarks')
-call dein#add('Nymphium/nyaovim-dynfont')
-call dein#add('rhysd/nyaovim-markdown-preview')
-call dein#add('rhysd/nyaovim-popup-tooltip')
-call dein#add('rhysd/nyaovim-mini-browser')
+"call dein#add('Nymphium/nyaovim-dynfont')
 call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/neosnippet-snippets') " スニペット
-call dein#add('Shougo/neosnippet.vim') " スニペット
-call dein#add('Shougo/unite.vim') " ファイル操作とか
+call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/vimfiler.vim')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-call dein#add('Townk/vim-autoclose') " カッコを自動で閉じる
+call dein#add('Xuyuanp/nerdtree-git-plugin')
+"call dein#add('airblade/vim-gitgutter')
 call dein#add('airblade/vim-rooter')
 call dein#add('christoomey/vim-tmux-navigator')
 call dein#add('daniel-samson/project-tree.vim')
 call dein#add('editorconfig/editorconfig-vim')
 call dein#add('evidens/vim-twig')
 call dein#add('fuenor/qfixgrep')
-call dein#add('honza/vim-snippets') " スニペット
-call dein#add('itchyny/lightline.vim') " 情報を見やすく
+call dein#add('iberianpig/tig-explorer.vim')
 call dein#add('kana/vim-submode')
 call dein#add('kassio/neoterm')
 call dein#add('leafcage/yankround.vim')
 call dein#add('maksimr/vim-jsbeautify')
 call dein#add('mattn/emmet-vim')
-call dein#add('nathanaelkane/vim-indent-guides') " インデントを色分け
 call dein#add('regedarek/ZoomWin')
+"call dein#add('rhysd/nyaovim-markdown-preview')
+"call dein#add('rhysd/nyaovim-mini-browser')
+"call dein#add('rhysd/nyaovim-popup-tooltip')
+call dein#add('scrooloose/nerdtree')
 call dein#add('scrooloose/syntastic')
 call dein#add('thinca/vim-quickrun')
 call dein#add('tpope/vim-fugitive')
-call dein#add('ujihisa/neco-look') " 英単語の補完
 call dein#add('vim-jp/vimdoc-ja')
 call dein#add('vim-scripts/DirDiff.vim')
 call dein#add('vim-scripts/EnhCommentify.vim')
 call dein#add('vim-scripts/grep.vim')
-call dein#add('scrooloose/nerdtree')
-call dein#add('Xuyuanp/nerdtree-git-plugin')
-call dein#add('airblade/vim-gitgutter')
-call dein#add('iberianpig/tig-explorer.vim')
 
 " Syntax
 call dein#add('chr4/nginx.vim')
@@ -75,6 +75,7 @@ set runtimepath^=$HOME/.vim
 set ambiwidth=double
 set shell=/bin/bash
 set nocompatible
+"set termguicolors
 filetype on
 "let g:sierra_Pitch = 1
 "let g:sierra_Sunset = 1
@@ -120,6 +121,15 @@ set fileencodings=utf-8,sjis,euc-jp,latin1
 set tabstop=2 shiftwidth=2 expandtab
 set listchars=tab:>\ ,trail:~
 set list
+" colorscheme 変更後に背景透過を継続
+augroup TransparentBG
+  	autocmd!
+	autocmd Colorscheme * highlight Normal ctermbg=none
+	autocmd Colorscheme * highlight NonText ctermbg=none
+	autocmd Colorscheme * highlight LineNr ctermbg=none
+	autocmd Colorscheme * highlight Folded ctermbg=none
+	autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
+augroup END
 
 inoremap <C-U> <C-G>u<C-U>
 
@@ -240,7 +250,7 @@ highlight Normal ctermbg=none
 
 " vimfiler -------------------------------
 " F2 でツリーを表示する
-nnoremap <F2> :VimFiler -split -simple -winwidth=30 -no-quit<Cr>
+nnoremap <F2> :VimFiler -split -simple -winwidth=20 -no-quit<Cr>
 
 autocmd! FileType vimfiler call My_vimfiler_settings()
 function! My_vimfiler_settings()
@@ -275,10 +285,6 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 
 " デフォルトのファイラを vimfiler にする。(設定なしだとNERDtree)
 let g:vimfiler_as_default_explorer=1
-
-" Vim を起動させると自動的に vimfiler を起動する。
-nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit -no-focus<Cr>
-nnoremap <leader>e :VimFilerExplore -split -winwidth=30 -find -no-quit -no-focus<Cr>
 
 " セーフモード解除
 call vimfiler#custom#profile('default', 'context', { 'safe' : 0, })
