@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Townk/vim-autoclose'
   Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle'] }
   Plug 'Shougo/deoplete.nvim'
+  " エラーの際は :UpdateRemotePlugins
   Plug 'Shougo/unite.vim'
   Plug 'Shougo/vimfiler.vim', {}
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -41,7 +42,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/grep.vim'
 " Plug 'edkolev/tmuxline.vim'
   Plug 'konpa/devicon'
-  Plug 'airblade/vim-gitgutter'
+  Plug 'airblade/vim-gitgutter', { 'on':  ['GitGutterEnable'] }
 
 " Syntax
   Plug 'chr4/nginx.vim'
