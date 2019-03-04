@@ -25,6 +25,7 @@ elif [ $machine = "Mac" ]; then
     sed -ie "s/\%PASTE\%/\"$MAC_PASTE\"/g" /tmp/.tmux.conf
 fi
 cp -f /tmp/.tmux.conf ~/
+cp -f $dir/tmux/themes/default.sh ~/.tmux/plugins/tmux-powerline/themes/default.sh
 
 # vimrc
 rm ~/.vimrc \
