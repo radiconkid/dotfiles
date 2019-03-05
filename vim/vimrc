@@ -228,7 +228,6 @@ nnoremap ]Q :<C-u>clast<CR>  " 最後へ
 "emmet の補完を<TAB>に変更
 let g:user_emmet_expandabbr_key = '<Tab>'
 
-let $PYTHONPATH='/usr/lib/python3.4/site-packages'
 highlight Normal ctermbg=none
 
 " vimfiler -------------------------------
@@ -463,8 +462,8 @@ set ttimeoutlen=150
 "Leave Insert mode
 autocmd InsertLeave * call Fcitx2en()
 "##### auto fcitx end ######
-let g:python2_host_prog = $PYENV_ROOT . '/shims/python2'
-let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
+"let g:python2_host_prog = $PYENV_ROOT . '/shims/python2'
+"let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
 set gfn=Osaka-Mono:h18
 
