@@ -43,6 +43,9 @@ call plug#begin('~/.vim/plugged')
 " Plug 'edkolev/tmuxline.vim'
   Plug 'konpa/devicon'
   Plug 'airblade/vim-gitgutter', { 'on':  ['GitGutterEnable'] }
+  "deopleteが必要
+  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'roxma/nvim-yarp'
 
 " Syntax
   Plug 'chr4/nginx.vim'
